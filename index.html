@@ -1,32 +1,9 @@
-<style>
-  .fixed-embed{
-    height: 320px;
-    overflow: hidden;
-    border-radius: 14px;
-  }
-  .fixed-embed .tradingview-widget-container{
-    height: 320px !important;
-  }
-  /* Kutular uzamasın */
-.widget-box{
-  height: 260px;
-  overflow: hidden;
-  border-radius: 14px;
-}
-
-/* TradingView container’ı da kutuya uysun */
-.widget-box .tradingview-widget-container{
-  height: 260px !important;
-}
-
-</style>
-
 <!doctype html>
 <html lang="tr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Piyasa Paneli</title>
+  <title>CanlıFinans</title>
   <meta name="description" content="Döviz, altın-gümüş, BIST 100, endeksler ve kripto fiyatları — sade piyasa paneli." />
 
   <style>
@@ -100,7 +77,7 @@
   <div class="container">
     <header>
       <div>
-        <h1>Piyasa Paneli</h1>
+        <h1>Canlı Finans - Döviz-Emtia-BİST100-SP500-NASDAQ</h1>
         <div class="sub">Döviz • Altın/Gümüş • BIST 100 • S&P 500 • NASDAQ • Kripto</div>
       </div>
       <div class="clock" id="clock">—</div>
@@ -120,26 +97,19 @@
         <p>USD/TRY, EUR/TRY gibi pariteler — otomatik güncellenir.</p>
 
         <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
-       <div class="tradingview-widget-container" style="height:120px;">
+        <div class="tradingview-widget-container" style="height:300px;">
   <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
   {
-    "symbols": [
-      {"proName":"FX_IDC:USDTRY","title":"USD/TRY"},
-      {"proName":"FX_IDC:EURTRY","title":"EUR/TRY"},
-      {"proName":"FX_IDC:GBPTRY","title":"GBP/TRY"},
-      {"proName":"FX_IDC:CHFTRY","title":"CHF/TRY"},
-      {"proName":"FX_IDC:JPYTRY","title":"JPY/TRY"}
-    ],
-    "showSymbolLogo": true,
+    "width": "100%",
+    "height": 300,
+    "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
     "isTransparent": true,
-    "displayMode": "regular",
     "colorTheme": "dark",
     "locale": "tr"
   }
   </script>
 </div>
-
 
       </div>
 
@@ -148,7 +118,7 @@
         <p>XAUUSD ve XAGUSD grafikleri.</p>
 
         <!-- 2) BURAYA TradingView "Symbol Overview" (XAUUSD) -->
-       <div class="widget-box"><div class="tradingview-widget-container" style="height:260px;">
+   <div class="tradingview-widget-container" style="height:240px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
@@ -167,11 +137,12 @@
   }
   </script>
 </div>
-</div>
+
+
         <div style="height:12px"></div>
 
-       <div class="widget-box">
- <div class="tradingview-widget-container" style="height:240px;">
+        <!-- 3) BURAYA TradingView "Symbol Overview" (XAGUSD) -->
+        <div class="tradingview-widget-container" style="height:240px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
@@ -191,9 +162,6 @@
   </script>
 </div>
 
-</div>
-
-
       </div>
 
       <div class="card span6" id="endeks">
@@ -201,47 +169,34 @@
         <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
         <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-       <div style="padding:18px; text-align:center; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(0,0,0,.10);">
-  <div style="font-size:14px; color:rgba(232,238,252,.85); margin-bottom:10px;">BIST 100</div>
-  <div style="font-size:12px; color:rgba(232,238,252,.65); margin-bottom:14px;">
-    BIST verisini widget ile eklemek için Investing iframe kullanacağız.
-  </div>
-  <a href="https://tr.investing.com/indices/ise-100" target="_blank"
-     style="display:inline-block; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.14); color:#b9d3ff; text-decoration:none; background:rgba(255,255,255,.04);">
-    BIST 100’ü Aç
-  </a>
-</div>
-
+        <div class="widget">Widget buraya gelecek (BIST 100)</div>
 
         <div style="height:12px"></div>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px;">
-
-  <!-- S&P 500 -->
-  <iframe 
-    src="https://tr.investing.com/indices/us-spx-500-chart"
-    style="width:100%; height:420px; border:none; border-radius:12px;">
-  </iframe>
-
-  <!-- NASDAQ -->
-  <iframe 
-    src="https://tr.investing.com/indices/nasdaq-composite-chart"
-    style="width:100%; height:420px; border:none; border-radius:12px;">
-  </iframe>
-
+        <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
+       <div class="tradingview-widget-container" style="height:300px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+    "symbols": [
+      ["S&P 500","SP:SPX|1D"],
+      ["NASDAQ 100","NASDAQ:NDX|1D"],
+      ["DXY","TVC:DXY|1D"]
+    ],
+    "chartOnly": false,
+    "width": "100%",
+    "height": 300,
+    "locale": "tr",
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "showVolume": false,
+    "showMA": false,
+    "hideDateRanges": false,
+    "hideMarketStatus": false,
+    "hideSymbolLogo": false
+  }
+  </script>
 </div>
-
-<!-- BIST 100 -->
-<div style="margin-top:18px;">
-  <iframe 
-    src="https://tr.investing.com/indices/ise-100-chart"
-    style="width:100%; height:420px; border:none; border-radius:12px;">
-  </iframe>
-</div>
-
-
-
-
 
       </div>
 
@@ -250,7 +205,7 @@
         <p>BTC, ETH ve öne çıkanlar.</p>
 
         <!-- 6) BURAYA TradingView "Screener" veya "Market Overview" (Crypto) -->
-        <div class="tradingview-widget-container" style="height:420px;">
+       <div class="tradingview-widget-container" style="height:420px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
   {
@@ -304,3 +259,4 @@
   </script>
 </body>
 </html>
+
