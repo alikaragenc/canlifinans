@@ -3,21 +3,21 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CanliFinans • Piyasa Paneli</title>
+  <title>Canlı Finans • Piyasa Paneli</title>
 
   <style>
     :root{
       --bg1:#061425;
       --bg2:#081b2f;
       --card: rgba(255,255,255,.06);
-      --card2: rgba(0,0,0,.10);
       --stroke: rgba(255,255,255,.10);
-      --stroke2: rgba(255,255,255,.14);
+      --stroke2: rgba(255,255,255,.16);
       --text: rgba(232,238,252,.92);
       --muted: rgba(232,238,252,.62);
       --muted2: rgba(232,238,252,.45);
       --shadow: 0 18px 50px rgba(0,0,0,.45);
       --r: 18px;
+      --accent: rgba(62,160,255,.35);
     }
 
     *{box-sizing:border-box}
@@ -30,32 +30,72 @@
         radial-gradient(1200px 700px at 30% 10%, rgba(62,160,255,.18), transparent 55%),
         radial-gradient(900px 600px at 85% 30%, rgba(0,255,210,.10), transparent 55%),
         linear-gradient(180deg, var(--bg1), var(--bg2) 60%, #05101f);
-      padding: 28px 18px 40px;
+      padding: 22px 16px 44px;
     }
 
     .wrap{max-width:1080px; margin:0 auto;}
-    .top{
-      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
-      margin-bottom: 14px;
-    }
-    .brand h1{
-      font-size: 28px; line-height:1.1; margin:0 0 6px 0;
-      letter-spacing:.2px;
-    }
-    .brand p{margin:0; color:var(--muted); font-size:13px}
-    .meta{
-      text-align:right; color:var(--muted);
-      font-size:12px; line-height:1.4;
-      padding-top: 6px;
-      white-space:nowrap;
+
+    /* Top bar */
+    .topbar{
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+      background: rgba(6,20,37,.55);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--stroke);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      padding: 14px 14px;
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      justify-content: space-between;
     }
 
-    .tabs{
-      display:flex; flex-wrap:wrap; gap:10px;
-      margin: 14px 0 18px;
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 240px;
     }
-    .tab{
-      border:1px solid var(--stroke);
+    .mark{
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background:
+        radial-gradient(16px 16px at 30% 30%, rgba(62,160,255,.55), transparent 60%),
+        radial-gradient(22px 22px at 70% 70%, rgba(0,255,210,.35), transparent 60%),
+        rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      flex: 0 0 auto;
+    }
+    .mark svg{opacity:.9}
+
+    .brandText{display:flex; flex-direction:column; gap:2px}
+    .brandName{
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: .2px;
+      line-height:1.1;
+    }
+    .slogan{
+      font-size: 12px;
+      color: var(--muted);
+      line-height:1.2;
+    }
+
+    .nav{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .pill{
+      border: 1px solid var(--stroke);
       background: rgba(255,255,255,.04);
       color: var(--text);
       padding: 9px 12px;
@@ -64,16 +104,32 @@
       cursor: pointer;
       user-select:none;
       transition: .15s ease;
+      text-decoration:none;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
     }
-    .tab:hover{border-color: var(--stroke2)}
-    .tab.active{
-      background: rgba(62,160,255,.15);
-      border-color: rgba(62,160,255,.35);
+    .pill:hover{border-color: var(--stroke2)}
+    .pill .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: rgba(62,160,255,.65);
+      box-shadow: 0 0 0 4px rgba(62,160,255,.12);
     }
 
-    .panel{display:none;}
-    .panel.active{display:block;}
+    .meta{
+      text-align:right;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.4;
+      white-space:nowrap;
+      min-width: 165px;
+    }
 
+    /* Sections */
+    .section{
+      margin-top: 16px;
+      scroll-margin-top: 92px;
+    }
     .card{
       background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
       border: 1px solid var(--stroke);
@@ -82,57 +138,117 @@
       padding: 14px;
       backdrop-filter: blur(10px);
     }
-
+    .head{
+      display:flex;
+      align-items:flex-end;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
     .card h2{
-      margin:0 0 4px;
+      margin:0;
       font-size: 15px;
       letter-spacing:.2px;
     }
-    .card p.sub{
-      margin:0 0 12px;
+    .sub{
+      margin: 6px 0 0;
       color: var(--muted);
       font-size: 12px;
     }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1.12fr .88fr;
-      gap: 14px;
-      align-items:start;
+    .hint{
+      color: var(--muted2);
+      font-size: 12px;
     }
 
-    .stack{display:grid; gap:12px;}
-    .widgetbox{
-      border: 1px dashed rgba(255,255,255,.16);
-      border-radius: 14px;
-      background: rgba(0,0,0,.10);
-      overflow:hidden;
-      min-height: 210px;
-    }
-
-    /* Sağ kutudaki 3 mini panel (asla üst üste binmez) */
-    .right-stack{display:grid; gap:12px;}
-    .tv-box{
+    /* FX table */
+    .fxWrap{
       border: 1px solid rgba(255,255,255,.10);
       border-radius: 14px;
       background: rgba(0,0,0,.12);
-      padding: 10px 10px 0;
       overflow:hidden;
-      height: 122px;
     }
-    .tv-box h4{
-      margin:0 0 8px 0;
+    table{
+      width:100%;
+      border-collapse: collapse;
       font-size: 13px;
-      font-weight: 650;
-      color: rgba(232,238,252,.86);
-      letter-spacing:.2px;
     }
-    .tv-box .tradingview-widget-container{height:86px !important}
+    thead th{
+      text-align:left;
+      padding: 10px 12px;
+      color: rgba(232,238,252,.72);
+      font-size: 12px;
+      letter-spacing:.2px;
+      background: rgba(255,255,255,.04);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      white-space: nowrap;
+    }
+    tbody td{
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+      color: rgba(232,238,252,.88);
+      white-space: nowrap;
+    }
+    tbody tr:hover td{background: rgba(255,255,255,.03)}
+    td.num{text-align:right; font-variant-numeric: tabular-nums;}
+    .ccy{
+      display:flex; align-items:center; gap:8px;
+      font-weight: 650;
+    }
+    .tag{
+      font-size: 11px;
+      color: rgba(232,238,252,.70);
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      font-weight: 600;
+    }
+    .fxStatus{
+      padding: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
 
-    /* Notlar */
+    /* Widgets grid */
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 980px){
+      .grid{grid-template-columns: repeat(2, 1fr);}
+      .meta{display:none}
+      .brand{min-width:auto}
+    }
+    @media (max-width: 640px){
+      .grid{grid-template-columns: 1fr;}
+      .topbar{gap:10px}
+      .pill{padding:8px 10px}
+    }
+
+    .wcard{
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      background: rgba(0,0,0,.12);
+      overflow:hidden;
+      height: 175px; /* sabit = “uzayıp boşluk” yapmaz */
+    }
+    .wtitle{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap:10px;
+      padding: 10px 10px 0;
+    }
+    .wtitle strong{font-size: 13px;}
+    .wtitle span{font-size: 11px; color: var(--muted2);}
+    .wbody{height: 142px; padding: 0 8px 8px;}
+    .tradingview-widget-container{height: 142px !important}
+
+    /* Notes */
     textarea{
       width:100%;
-      min-height: 220px;
+      min-height: 180px;
       border-radius: 14px;
       border: 1px solid var(--stroke);
       background: rgba(0,0,0,.18);
@@ -143,7 +259,7 @@
       font-size: 13px;
       line-height: 1.5;
     }
-    .noteRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px}
+    .row{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px}
     .btn{
       border:1px solid var(--stroke);
       background: rgba(255,255,255,.05);
@@ -154,185 +270,299 @@
       font-size: 13px;
     }
     .btn:hover{border-color: var(--stroke2)}
-    .hint{color:var(--muted2); font-size:12px}
-
-    /* Küçük ekran */
-    @media (max-width: 900px){
-      .grid{grid-template-columns:1fr}
-      .meta{text-align:left}
-    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <div class="top">
+
+    <header class="topbar">
       <div class="brand">
-        <h1>Piyasa Paneli</h1>
-        <p>Döviz • Altın/Gümüş • ABD Hisseleri • Kripto • Emtialar</p>
+        <div class="mark" aria-hidden="true">
+          <!-- Mini ikon (tek dosya, resim yok) -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+            <path d="M4 14c2.2-4.5 4.9-6.7 8.2-6.7 4.2 0 6.3 3.1 7.8 6.7" stroke="rgba(232,238,252,.9)" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M6 18h12" stroke="rgba(232,238,252,.75)" stroke-width="1.6" stroke-linecap="round"/>
+            <path d="M7.5 11.5l2 2 3.5-5.5 2 3" stroke="rgba(62,160,255,.9)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div class="brandText">
+          <div class="brandName">Canlı Finans</div>
+          <div class="slogan">Piyasaya hızlı bakış • sade, hızlı, güncel</div>
+        </div>
       </div>
+
+      <nav class="nav" aria-label="Bölümler">
+        <a class="pill" href="#doviz"><span class="dot"></span>Döviz</a>
+        <a class="pill" href="#altin"><span class="dot"></span>Altın/Gümüş</a>
+        <a class="pill" href="#borsa"><span class="dot"></span>Borsa</a>
+        <a class="pill" href="#kripto"><span class="dot"></span>Kripto</a>
+        <a class="pill" href="#emtia"><span class="dot"></span>Emtia</a>
+        <a class="pill" href="#notlar"><span class="dot"></span>Günün Notları</a>
+      </nav>
+
       <div class="meta">
         <div id="clock">—</div>
-        <div class="hint">CanliFinans (GitHub Pages)</div>
+        <div class="hint">GitHub Pages</div>
       </div>
-    </div>
+    </header>
 
-    <div class="tabs" id="tabs">
-      <div class="tab active" data-tab="fx">Döviz</div>
-      <div class="tab" data-tab="metals">Altın / Gümüş</div>
-      <div class="tab" data-tab="markets">ABD + Kripto + Emtia</div>
-      <div class="tab" data-tab="notes">Günün Notları</div>
-    </div>
-
-    <!-- Döviz -->
-    <section class="panel active" id="panel-fx">
+    <!-- 1) Döviz -->
+    <section class="section" id="doviz">
       <div class="card">
-        <h2>Döviz</h2>
-        <p class="sub">USD/TRY, EUR/TRY gibi çaprazlar — otomatik güncellenir.</p>
-
-        <div class="widgetbox" style="min-height:260px;">
-          <div class="tradingview-widget-container" style="height:260px;">
-            <div class="tradingview-widget-container__widget"></div>
-            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
-            {
-              "width": "100%",
-              "height": "260",
-              "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
-              "isTransparent": true,
-              "colorTheme": "dark",
-              "locale": "tr"
-            }
-            </script>
+        <div class="head">
+          <div>
+            <h2>Döviz (TCMB alış / satış)</h2>
+            <p class="sub">Türk Lirası karşılığı: USD, EUR, GBP, CHF, SAR, RUB…</p>
           </div>
+          <div class="hint" id="fxMeta">Yükleniyor…</div>
+        </div>
+
+        <div class="fxWrap">
+          <div class="fxStatus" id="fxStatus">Kurlar getiriliyor…</div>
+          <table id="fxTable" style="display:none;">
+            <thead>
+              <tr>
+                <th>Döviz</th>
+                <th class="num">Alış</th>
+                <th class="num">Satış</th>
+              </tr>
+            </thead>
+            <tbody id="fxBody"></tbody>
+          </table>
         </div>
       </div>
     </section>
 
-    <!-- Altın / Gümüş -->
-    <section class="panel" id="panel-metals">
+    <!-- 2) Altın / Gümüş -->
+    <section class="section" id="altin">
       <div class="card">
-        <h2>Altın / Gümüş</h2>
-        <p class="sub">Gram altın (TRY) ve gümüş (USD) — kompakt, temaya uyumlu.</p>
+        <div class="head">
+          <div>
+            <h2>Altın / Gümüş</h2>
+            <p class="sub">Kompakt kartlar — sayfa uzamaz, tema bozulmaz.</p>
+          </div>
+          <div class="hint">Kaynak: TradingView</div>
+        </div>
 
         <div class="grid">
-          <div class="stack">
-            <div class="widgetbox" style="min-height:240px;">
-              <div class="tradingview-widget-container" style="height:240px;">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-                {
-                  "symbols": [["Altın (Gram/TL)","FX_IDC:XAUTRYG|1D"]],
-                  "chartOnly": false,
-                  "width": "100%",
-                  "height": 240,
-                  "locale": "tr",
-                  "colorTheme": "dark",
-                  "isTransparent": true,
-                  "showVolume": false,
-                  "showMA": false,
-                  "hideDateRanges": false,
-                  "hideMarketStatus": false,
-                  "hideSymbolLogo": false
-                }
-                </script>
-              </div>
+          <!-- Gram Altın (TRY) -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>Gram Altın</strong><span>TRY</span>
             </div>
-
-            <div class="widgetbox" style="min-height:240px;">
-              <div class="tradingview-widget-container" style="height:240px;">
+            <div class="wbody">
+              <div class="tradingview-widget-container">
                 <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
                 {
-                  "symbols": [["Gümüş (XAGUSD)","TVC:SILVER|1D"]],
-                  "chartOnly": false,
-                  "width": "100%",
-                  "height": 240,
-                  "locale": "tr",
-                  "colorTheme": "dark",
-                  "isTransparent": true,
-                  "showVolume": false,
-                  "showMA": false,
-                  "hideDateRanges": false,
-                  "hideMarketStatus": false,
-                  "hideSymbolLogo": false
+                  "symbol":"FX_IDC:XAUTRYG",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
                 }
                 </script>
               </div>
             </div>
           </div>
 
-          <div class="card" style="padding:14px; min-height: 510px;">
-            <h2>Hızlı Bakış</h2>
-            <p class="sub">ABD + Kripto + Emtia (kompakt) — sekmeden de görebilirsin.</p>
-
-            <div class="right-stack">
-              <div class="tv-box">
-                <h4>ABD Hisseleri</h4>
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-                  {
-                    "symbols": [
-                      {"proName":"NASDAQ:AAPL","title":"AAPL"},
-                      {"proName":"NASDAQ:MSFT","title":"MSFT"},
-                      {"proName":"NASDAQ:NVDA","title":"NVDA"},
-                      {"proName":"NASDAQ:GOOGL","title":"GOOGL"},
-                      {"proName":"NASDAQ:AMZN","title":"AMZN"},
-                      {"proName":"NYSE:TSLA","title":"TSLA"}
-                    ],
-                    "colorTheme":"dark",
-                    "isTransparent":true,
-                    "locale":"tr"
-                  }
-                  </script>
-                </div>
+          <!-- Gümüş -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>Gümüş</strong><span>XAGUSD</span>
+            </div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol":"TVC:SILVER",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
+                }
+                </script>
               </div>
+            </div>
+          </div>
 
-              <div class="tv-box">
-                <h4>Kripto</h4>
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-                  {
-                    "symbols": [
-                      {"proName":"BINANCE:BTCUSDT","title":"BTC"},
-                      {"proName":"BINANCE:ETHUSDT","title":"ETH"},
-                      {"proName":"BINANCE:SOLUSDT","title":"SOL"},
-                      {"proName":"BINANCE:BNBUSDT","title":"BNB"},
-                      {"proName":"BINANCE:XRPUSDT","title":"XRP"}
-                    ],
-                    "colorTheme":"dark",
-                    "isTransparent":true,
-                    "locale":"tr"
-                  }
-                  </script>
-                </div>
+          <!-- Ons Altın -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>Ons Altın</strong><span>XAUUSD</span>
+            </div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol":"TVC:GOLD",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
+                }
+                </script>
               </div>
+            </div>
+          </div>
+        </div>
 
-              <div class="tv-box" style="margin-bottom:0;">
-                <h4>Emtialar</h4>
-                <div class="tradingview-widget-container">
-                  <div class="tradingview-widget-container__widget"></div>
-                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-                  {
-                    "symbols": [
-                      {"proName":"TVC:UKOIL","title":"Brent"},
-                      {"proName":"TVC:USOIL","title":"WTI"},
-                      {"proName":"TVC:NATGAS","title":"Gas"},
-                      {"proName":"TVC:COPPER","title":"Copper"},
-                      {"proName":"TVC:SILVER","title":"Silver"},
-                      {"proName":"TVC:GOLD","title":"Gold"}
-                    ],
-                    "colorTheme":"dark",
-                    "isTransparent":true,
-                    "locale":"tr"
-                  }
-                  </script>
-                </div>
+      </div>
+    </section>
+
+    <!-- 3) Borsa -->
+    <section class="section" id="borsa">
+      <div class="card">
+        <div class="head">
+          <div>
+            <h2>Borsa</h2>
+            <p class="sub">BIST + ABD endeksleri (TradingView sembol uygunsa otomatik dolar).</p>
+          </div>
+          <div class="hint">Kaynak: TradingView</div>
+        </div>
+
+        <div class="grid">
+          <!-- BIST 100 -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>BIST 100</strong><span>XU100</span>
+            </div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol":"BIST:XU100",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
+                }
+                </script>
               </div>
+            </div>
+          </div>
 
-              <div class="hint" style="margin-top:10px;">
-                Not: Bu panel grafik yerine kompakt veriyi hedefler — sayfa uzamaz, tema bozulmaz.
+          <!-- S&P 500 -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>S&amp;P 500</strong><span>SPX</span>
+            </div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol":"TVC:SPX",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
+                }
+                </script>
+              </div>
+            </div>
+          </div>
+
+          <!-- NASDAQ 100 -->
+          <div class="wcard">
+            <div class="wtitle">
+              <strong>NASDAQ 100</strong><span>NDX</span>
+            </div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {
+                  "symbol":"NASDAQ:NDX",
+                  "width":"100%",
+                  "height":"142",
+                  "locale":"tr",
+                  "dateRange":"1D",
+                  "colorTheme":"dark",
+                  "isTransparent":true,
+                  "chartType":"area",
+                  "largeChartUrl":""
+                }
+                </script>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="hint" style="margin:10px 2px 0;">
+          Eğer bazı endeks kartları “boş” kalırsa sebep TradingView sembol kısıtı olabilir. O durumda alternatif sembol (ör. SP:SPX, TVC:NDX) ile tek satırda çözeriz.
+        </p>
+      </div>
+    </section>
+
+    <!-- 4) Kripto -->
+    <section class="section" id="kripto">
+      <div class="card">
+        <div class="head">
+          <div>
+            <h2>Kripto</h2>
+            <p class="sub">BTC, ETH, SOL…</p>
+          </div>
+          <div class="hint">Kaynak: TradingView</div>
+        </div>
+
+        <div class="grid">
+          <div class="wcard">
+            <div class="wtitle"><strong>Bitcoin</strong><span>BTCUSDT</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"BINANCE:BTCUSDT","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
+              </div>
+            </div>
+          </div>
+
+          <div class="wcard">
+            <div class="wtitle"><strong>Ethereum</strong><span>ETHUSDT</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"BINANCE:ETHUSDT","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
+              </div>
+            </div>
+          </div>
+
+          <div class="wcard">
+            <div class="wtitle"><strong>Solana</strong><span>SOLUSDT</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"BINANCE:SOLUSDT","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
               </div>
             </div>
           </div>
@@ -340,86 +570,67 @@
       </div>
     </section>
 
-    <!-- Piyasalar -->
-    <section class="panel" id="panel-markets">
+    <!-- 5) Emtia -->
+    <section class="section" id="emtia">
       <div class="card">
-        <h2>ABD + Kripto + Emtia</h2>
-        <p class="sub">Sağ kutudaki kompakt panellerin aynısı — burada geniş görünür.</p>
+        <div class="head">
+          <div>
+            <h2>Emtia</h2>
+            <p class="sub">Brent, Ham Petrol, Doğalgaz…</p>
+          </div>
+          <div class="hint">Kaynak: TradingView</div>
+        </div>
 
-        <div class="right-stack">
-          <div class="tv-box" style="height:140px;">
-            <h4>ABD Hisseleri</h4>
-            <div class="tradingview-widget-container" style="height:100px;">
-              <div class="tradingview-widget-container__widget"></div>
-              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-              {
-                "symbols": [
-                  {"proName":"NASDAQ:AAPL","title":"Apple"},
-                  {"proName":"NASDAQ:MSFT","title":"Microsoft"},
-                  {"proName":"NASDAQ:NVDA","title":"Nvidia"},
-                  {"proName":"NASDAQ:GOOGL","title":"Google"},
-                  {"proName":"NASDAQ:AMZN","title":"Amazon"},
-                  {"proName":"NYSE:TSLA","title":"Tesla"}
-                ],
-                "colorTheme":"dark",
-                "isTransparent":true,
-                "locale":"tr"
-              }
-              </script>
+        <div class="grid">
+          <div class="wcard">
+            <div class="wtitle"><strong>Brent</strong><span>UKOIL</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"TVC:UKOIL","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
+              </div>
             </div>
           </div>
 
-          <div class="tv-box" style="height:140px;">
-            <h4>Kripto</h4>
-            <div class="tradingview-widget-container" style="height:100px;">
-              <div class="tradingview-widget-container__widget"></div>
-              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-              {
-                "symbols": [
-                  {"proName":"BINANCE:BTCUSDT","title":"Bitcoin"},
-                  {"proName":"BINANCE:ETHUSDT","title":"Ethereum"},
-                  {"proName":"BINANCE:SOLUSDT","title":"Solana"},
-                  {"proName":"BINANCE:BNBUSDT","title":"BNB"},
-                  {"proName":"BINANCE:XRPUSDT","title":"XRP"}
-                ],
-                "colorTheme":"dark",
-                "isTransparent":true,
-                "locale":"tr"
-              }
-              </script>
+          <div class="wcard">
+            <div class="wtitle"><strong>Ham Petrol</strong><span>USOIL</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"TVC:USOIL","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
+              </div>
             </div>
           </div>
 
-          <div class="tv-box" style="height:140px; margin-bottom:0;">
-            <h4>Emtialar</h4>
-            <div class="tradingview-widget-container" style="height:100px;">
-              <div class="tradingview-widget-container__widget"></div>
-              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-              {
-                "symbols": [
-                  {"proName":"TVC:UKOIL","title":"Brent"},
-                  {"proName":"TVC:USOIL","title":"Ham Petrol"},
-                  {"proName":"TVC:NATGAS","title":"Doğalgaz"},
-                  {"proName":"TVC:COPPER","title":"Bakır"},
-                  {"proName":"TVC:SILVER","title":"Gümüş"},
-                  {"proName":"TVC:GOLD","title":"Altın"}
-                ],
-                "colorTheme":"dark",
-                "isTransparent":true,
-                "locale":"tr"
-              }
-              </script>
+          <div class="wcard">
+            <div class="wtitle"><strong>Doğalgaz</strong><span>NATGAS</span></div>
+            <div class="wbody">
+              <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script src="https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js" async>
+                {"symbol":"TVC:NATGAS","width":"100%","height":"142","locale":"tr","dateRange":"1D","colorTheme":"dark","isTransparent":true,"chartType":"area","largeChartUrl":""}
+                </script>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Notlar -->
-    <section class="panel" id="panel-notes">
+    <!-- 6) Notlar -->
+    <section class="section" id="notlar">
       <div class="card">
-        <h2>Günün Notları</h2>
-        <p class="sub">Kısa kısa not al — sayfa kapanınca da kalsın (tarayıcıya kaydedilir).</p>
+        <div class="head">
+          <div>
+            <h2>Günün Notları</h2>
+            <p class="sub">Kısa not al — tarayıcıya kaydedilir.</p>
+          </div>
+          <div class="hint">Ctrl+S ile de kaydedebilirsin</div>
+        </div>
 
         <textarea id="notes" placeholder="Örnek:
 • USD/TRY kırılım seviyesi...
@@ -427,50 +638,32 @@
 • Bugün izlenecek haber: ...
 • Yapılacak: ..."></textarea>
 
-        <div class="noteRow">
+        <div class="row">
           <button class="btn" id="saveBtn">Kaydet</button>
           <button class="btn" id="clearBtn">Temizle</button>
           <span class="hint" id="saveHint">—</span>
         </div>
       </div>
     </section>
+
   </div>
 
   <script>
-    // Saat
+    // 1) Clock
     const clockEl = document.getElementById("clock");
     function tick(){
       const d = new Date();
       const pad = (n)=> String(n).padStart(2,"0");
-      const txt = `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()} • ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
-      clockEl.textContent = txt;
+      clockEl.textContent = `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()} • ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
     }
     setInterval(tick, 1000); tick();
 
-    // Sekmeler
-    const tabs = document.querySelectorAll(".tab");
-    const panels = {
-      fx: document.getElementById("panel-fx"),
-      metals: document.getElementById("panel-metals"),
-      markets: document.getElementById("panel-markets"),
-      notes: document.getElementById("panel-notes")
-    };
-    tabs.forEach(t=>{
-      t.addEventListener("click", ()=>{
-        tabs.forEach(x=>x.classList.remove("active"));
-        t.classList.add("active");
-        Object.values(panels).forEach(p=>p.classList.remove("active"));
-        panels[t.dataset.tab].classList.add("active");
-        window.scrollTo({top:0, behavior:"smooth"});
-      });
-    });
-
-    // Notlar (localStorage)
+    // 2) Notes (localStorage)
     const notes = document.getElementById("notes");
     const saveBtn = document.getElementById("saveBtn");
     const clearBtn = document.getElementById("clearBtn");
     const saveHint = document.getElementById("saveHint");
-    const KEY = "canlifinans_notes_v1";
+    const KEY = "canlifinans_notes_v2";
 
     function loadNotes(){
       const v = localStorage.getItem(KEY);
@@ -487,7 +680,6 @@
       saveHint.textContent = "Temizlendi";
       setTimeout(()=> saveHint.textContent="—", 2000);
     }
-
     saveBtn.addEventListener("click", saveNotes);
     clearBtn.addEventListener("click", clearNotes);
     notes.addEventListener("keydown", (e)=>{
@@ -495,8 +687,100 @@
         e.preventDefault(); saveNotes();
       }
     });
-
     loadNotes();
+
+    // 3) TCMB FX (alış/satış) via AllOrigins proxy
+    const fxStatus = document.getElementById("fxStatus");
+    const fxTable  = document.getElementById("fxTable");
+    const fxBody   = document.getElementById("fxBody");
+    const fxMeta   = document.getElementById("fxMeta");
+
+    const wanted = [
+      {code:"USD", name:"ABD Doları"},
+      {code:"EUR", name:"Euro"},
+      {code:"GBP", name:"Sterlin"},
+      {code:"CHF", name:"İsviçre Frangı"},
+      {code:"SAR", name:"Suudi Riyali"},
+      {code:"RUB", name:"Rus Rublesi"},
+      {code:"CAD", name:"Kanada Doları"},
+      {code:"AUD", name:"Avustralya Doları"},
+      {code:"JPY", name:"Japon Yeni"}
+    ];
+
+    const nf = new Intl.NumberFormat("tr-TR", {minimumFractionDigits: 4, maximumFractionDigits: 6});
+
+    async function loadTCMB(){
+      try{
+        const rawUrl = "https://www.tcmb.gov.tr/kurlar/today.xml";
+        const proxy = "https://api.allorigins.win/raw?url=" + encodeURIComponent(rawUrl);
+
+        const res = await fetch(proxy, {cache:"no-store"});
+        if(!res.ok) throw new Error("TCMB proxy response not ok");
+        const xmlText = await res.text();
+
+        const doc = new DOMParser().parseFromString(xmlText, "text/xml");
+        const root = doc.querySelector("Tarih_Date");
+        const dateStr = root?.getAttribute("Tarih") || "";
+        const asOf = root?.getAttribute("Date") || "";
+
+        const map = new Map();
+        doc.querySelectorAll("Currency").forEach(c=>{
+          const code = c.getAttribute("CurrencyCode");
+          const fb = (c.querySelector("ForexBuying")?.textContent || "").trim();
+          const fs = (c.querySelector("ForexSelling")?.textContent || "").trim();
+          if(code) map.set(code, {fb, fs});
+        });
+
+        fxBody.innerHTML = "";
+        let count = 0;
+
+        wanted.forEach(w=>{
+          const v = map.get(w.code);
+          if(!v) return;
+
+          const b = parseFloat(v.fb.replace(",", ".")) || null;
+          const s = parseFloat(v.fs.replace(",", ".")) || null;
+
+          // bazı para birimlerinde satış boş gelebiliyor; o zaman alıştan göster
+          const buy = b ?? s;
+          const sell = s ?? b;
+
+          if(buy == null && sell == null) return;
+
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td>
+              <div class="ccy">
+                <span class="tag">${w.code}</span>
+                <span>${w.name}</span>
+              </div>
+            </td>
+            <td class="num">${buy != null ? nf.format(buy) : "—"}</td>
+            <td class="num">${sell != null ? nf.format(sell) : "—"}</td>
+          `;
+          fxBody.appendChild(tr);
+          count++;
+        });
+
+        fxStatus.style.display = "none";
+        fxTable.style.display = "";
+        fxMeta.textContent = (dateStr || asOf) ? `Güncelleme: ${dateStr || asOf}` : "Güncelleme: bugün";
+
+        if(count === 0){
+          fxTable.style.display = "none";
+          fxStatus.style.display = "";
+          fxStatus.textContent = "Kurlar geldi ama tabloya uygun veri bulunamadı.";
+        }
+
+      }catch(e){
+        fxTable.style.display = "none";
+        fxStatus.style.display = "";
+        fxStatus.textContent = "Döviz tablosu şu an yüklenemedi. (Proxy/CORS kaynaklı olabilir)";
+        fxMeta.textContent = "—";
+      }
+    }
+
+    loadTCMB();
   </script>
 </body>
 </html>
