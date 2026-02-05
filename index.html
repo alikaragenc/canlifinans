@@ -169,7 +169,68 @@
         <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
         <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-        <div class="widget">Widget buraya gelecek (BIST 100)</div>
+        <div class="widget"><!-- ABD Hisseleri -->
+<h3 style="margin-top:10px;">ABD Hisseleri</h3>
+<div class="tradingview-widget-container" style="margin-bottom:12px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+    "symbols": [
+      {"proName": "NASDAQ:AAPL", "title": "Apple"},
+      {"proName": "NASDAQ:MSFT", "title": "Microsoft"},
+      {"proName": "NASDAQ:NVDA", "title": "Nvidia"},
+      {"proName": "NASDAQ:GOOGL", "title": "Google"},
+      {"proName": "NASDAQ:AMZN", "title": "Amazon"},
+      {"proName": "NYSE:TSLA", "title": "Tesla"}
+    ],
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "locale": "tr"
+  }
+  </script>
+</div>
+
+<!-- Kripto -->
+<h3>Kripto Paralar</h3>
+<div class="tradingview-widget-container" style="margin-bottom:12px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+    "symbols": [
+      {"proName": "BINANCE:BTCUSDT", "title": "Bitcoin"},
+      {"proName": "BINANCE:ETHUSDT", "title": "Ethereum"},
+      {"proName": "BINANCE:SOLUSDT", "title": "Solana"},
+      {"proName": "BINANCE:BNBUSDT", "title": "BNB"},
+      {"proName": "BINANCE:XRPUSDT", "title": "XRP"}
+    ],
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "locale": "tr"
+  }
+  </script>
+</div>
+
+<!-- Emtialar -->
+<h3>Emtialar</h3>
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+  {
+    "symbols": [
+      {"proName": "TVC:UKOIL", "title": "Brent Petrol"},
+      {"proName": "TVC:USOIL", "title": "Ham Petrol"},
+      {"proName": "TVC:NATGAS", "title": "Doğalgaz"},
+      {"proName": "TVC:COPPER", "title": "Bakır"},
+      {"proName": "TVC:SILVER", "title": "Gümüş"},
+      {"proName": "TVC:GOLD", "title": "Altın"}
+    ],
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "locale": "tr"
+  }
+  </script>
+</div>
+</div>
 
         <div style="height:12px"></div>
 
