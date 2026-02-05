@@ -191,14 +191,15 @@
         <div style="height:12px"></div>
 
         <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
-     <div class="tradingview-widget-container" style="height:220px;">
+   <div class="tradingview-widget-container" style="height:220px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
   {
     "symbols": [
-      {"proName": "TVC:SPX", "title": "S&P 500"},
-      {"proName": "NASDAQ:IXIC", "title": "NASDAQ (Composite)"},
-      {"proName": "TVC:DXY", "title": "DXY"}
+      {"proName":"TVC:SPX","title":"S&P 500"},
+      {"proName":"NASDAQ:IXIC","title":"NASDAQ"},
+      {"proName":"DJ:DJI","title":"Dow Jones"},
+      {"proName":"TVC:DXY","title":"DXY"}
     ],
     "isTransparent": true,
     "colorTheme": "dark",
@@ -206,6 +207,7 @@
   }
   </script>
 </div>
+
 
 
 
