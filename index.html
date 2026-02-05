@@ -71,6 +71,24 @@
     .news-meta{color:var(--muted);font-size:12px;margin-top:4px}
     footer{margin:18px 0 6px;color:var(--muted);font-size:12px}
   </style>
+  <style>
+  .right-stack .tv-box{
+    height: 120px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    background: rgba(0,0,0,.08);
+    padding: 10px 10px 0;
+    margin-bottom: 12px;
+  }
+  .right-stack h4{
+    margin: 0 0 8px 0;
+    font-size: 13px;
+    color: rgba(232,238,252,.85);
+    font-weight: 600;
+  }
+</style>
+
 </head>
 
 <body>
@@ -164,30 +182,73 @@
 
       </div>
 
-      <div class="card span6" id="endeks">
-        <h2>BIST 100 / Endeksler</h2>
-        <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
+      <div class="right-stack">
 
-        <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-        <div class="widget"><!-- ABD Hisseleri -->
-<h3 style="margin-top:10px;">ABD Hisseleri</h3>
-<div class="tradingview-widget-container" style="margin-bottom:12px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-  {
-    "symbols": [
-      {"proName": "NASDAQ:AAPL", "title": "Apple"},
-      {"proName": "NASDAQ:MSFT", "title": "Microsoft"},
-      {"proName": "NASDAQ:NVDA", "title": "Nvidia"},
-      {"proName": "NASDAQ:GOOGL", "title": "Google"},
-      {"proName": "NASDAQ:AMZN", "title": "Amazon"},
-      {"proName": "NYSE:TSLA", "title": "Tesla"}
-    ],
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "locale": "tr"
-  }
-  </script>
+  <div class="tv-box">
+    <h4>ABD Hisseleri</h4>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+      {
+        "symbols": [
+          {"proName":"NASDAQ:AAPL","title":"AAPL"},
+          {"proName":"NASDAQ:MSFT","title":"MSFT"},
+          {"proName":"NASDAQ:NVDA","title":"NVDA"},
+          {"proName":"NASDAQ:GOOGL","title":"GOOGL"},
+          {"proName":"NASDAQ:AMZN","title":"AMZN"},
+          {"proName":"NYSE:TSLA","title":"TSLA"}
+        ],
+        "colorTheme":"dark",
+        "isTransparent":true,
+        "locale":"tr"
+      }
+      </script>
+    </div>
+  </div>
+
+  <div class="tv-box">
+    <h4>Kripto</h4>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+      {
+        "symbols": [
+          {"proName":"BINANCE:BTCUSDT","title":"BTC"},
+          {"proName":"BINANCE:ETHUSDT","title":"ETH"},
+          {"proName":"BINANCE:SOLUSDT","title":"SOL"},
+          {"proName":"BINANCE:BNBUSDT","title":"BNB"},
+          {"proName":"BINANCE:XRPUSDT","title":"XRP"}
+        ],
+        "colorTheme":"dark",
+        "isTransparent":true,
+        "locale":"tr"
+      }
+      </script>
+    </div>
+  </div>
+
+  <div class="tv-box" style="margin-bottom:0;">
+    <h4>Emtialar</h4>
+    <div class="tradingview-widget-container" style="height:80px;">
+      <div class="tradingview-widget-container__widget"></div>
+      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+      {
+        "symbols": [
+          {"proName":"TVC:UKOIL","title":"Brent"},
+          {"proName":"TVC:USOIL","title":"WTI"},
+          {"proName":"TVC:NATGAS","title":"Gas"},
+          {"proName":"TVC:COPPER","title":"Copper"},
+          {"proName":"TVC:SILVER","title":"Silver"},
+          {"proName":"TVC:GOLD","title":"Gold"}
+        ],
+        "colorTheme":"dark",
+        "isTransparent":true,
+        "locale":"tr"
+      }
+      </script>
+    </div>
+  </div>
+
 </div>
 
 <!-- Kripto -->
