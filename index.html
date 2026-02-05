@@ -98,12 +98,12 @@
 
         <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
         <div class="widget"><!-- TradingView Widget BEGIN: Forex Heatmap / Ticker -->
-<div class="tradingview-widget-container" style="height: 240px;">
+<div class="tradingview-widget-container" style="height: 300px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
   {
     "width": "100%",
-    "height": 240,
+    "height": 300,
     "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
     "isTransparent": true,
     "colorTheme": "dark",
@@ -124,7 +124,7 @@
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
-    "symbols": [["Altın","OANDA:XAUUSD|1D"]],
+    "symbols": [["Gram Altın (TL)","FX_IDC:XAUTRYG|1D"]],
     "chartOnly": false,
     "width": "100%",
     "height": 240,
@@ -149,7 +149,8 @@
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
-    "symbols": [["Gümüş","OANDA:XAGUSD|1D"]],
+    "symbols": [["Gümüş (TL)","ICE:XAGTRYG|1D"]],
+
     "chartOnly": false,
     "width": "100%",
     "height": 240,
@@ -172,28 +173,19 @@
         <h2>BIST 100 / Endeksler</h2>
         <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
-        <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-        <div class="widget"><div class="tradingview-widget-container" style="height: 260px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-  {
-    "symbols": [["BIST 100","BIST:XU100|1D"]],
-    "chartOnly": false,
-    "width": "100%",
-    "height": 260,
-    "locale": "tr",
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "showVolume": false,
-    "showMA": false,
-    "hideDateRanges": false,
-    "hideMarketStatus": false
-  }
-  </script>
+       <!-- Investing.com Widget BEGIN -->
+<div style="width:100%;height:260px;overflow:hidden;border-radius:14px;">
+  <iframe
+    src="https://ssltsw.investing.com?lang=1&forex=0&commodities=0&indices=0&stocks=0&tabs=1,2,3,4"
+    width="100%"
+    height="260"
+    frameborder="0"
+    allowtransparency="true"
+    style="background:transparent;">
+  </iframe>
 </div>
-</div>
+<!-- Investing.com Widget END -->
 
-        <div style="height:12px"></div>
 
         <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
         <div class="widget"><div class="tradingview-widget-container" style="height: 260px;">
