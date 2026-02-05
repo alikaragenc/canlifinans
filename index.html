@@ -176,18 +176,28 @@
         <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
         <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-        <div class="widget">Widget buraya gelecek (BIST 100)</div>
+       <div style="padding:18px; text-align:center; border:1px solid rgba(255,255,255,.12); border-radius:14px; background:rgba(0,0,0,.10);">
+  <div style="font-size:14px; color:rgba(232,238,252,.85); margin-bottom:10px;">BIST 100</div>
+  <div style="font-size:12px; color:rgba(232,238,252,.65); margin-bottom:14px;">
+    BIST verisini widget ile eklemek için Investing iframe kullanacağız.
+  </div>
+  <a href="https://tr.investing.com/indices/ise-100" target="_blank"
+     style="display:inline-block; padding:10px 14px; border-radius:999px; border:1px solid rgba(255,255,255,.14); color:#b9d3ff; text-decoration:none; background:rgba(255,255,255,.04);">
+    BIST 100’ü Aç
+  </a>
+</div>
+
 
         <div style="height:12px"></div>
 
         <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
-        <div class="tradingview-widget-container" style="height:300px;">
+     <div class="tradingview-widget-container" style="height:300px;">
   <div class="tradingview-widget-container__widget"></div>
   <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
   {
     "symbols": [
-      ["S&P 500","SP:SPX|1D"],
-      ["NASDAQ 100","NASDAQ:NDX|1D"],
+      ["S&P 500","TVC:SPX|1D"],
+      ["NASDAQ (Composite)","NASDAQ:IXIC|1D"],
       ["DXY","TVC:DXY|1D"]
     ],
     "chartOnly": false,
@@ -204,6 +214,7 @@
   }
   </script>
 </div>
+
 
       </div>
 
