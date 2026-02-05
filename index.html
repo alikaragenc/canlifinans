@@ -97,7 +97,22 @@
         <p>USD/TRY, EUR/TRY gibi pariteler — otomatik güncellenir.</p>
 
         <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
-        <div class="widget">Widget buraya gelecek (Döviz)</div>
+        <div class="widget"><!-- TradingView Widget BEGIN: Forex Heatmap / Ticker -->
+<div class="tradingview-widget-container" style="height: 240px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+  {
+    "width": "100%",
+    "height": 240,
+    "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
+    "isTransparent": true,
+    "colorTheme": "dark",
+    "locale": "tr"
+  }
+  </script>
+</div>
+<!-- TradingView Widget END -->
+</div>
       </div>
 
       <div class="card span6" id="emtia">
@@ -105,12 +120,52 @@
         <p>XAUUSD ve XAGUSD grafikleri.</p>
 
         <!-- 2) BURAYA TradingView "Symbol Overview" (XAUUSD) -->
-        <div class="widget">Widget buraya gelecek (Altın)</div>
+        <div class="widget"><div class="tradingview-widget-container" style="height: 240px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+    "symbols": [["Altın","OANDA:XAUUSD|1D"]],
+    "chartOnly": false,
+    "width": "100%",
+    "height": 240,
+    "locale": "tr",
+    "colorTheme": "dark",
+    "autosize": false,
+    "showVolume": false,
+    "showMA": false,
+    "hideDateRanges": false,
+    "hideMarketStatus": false,
+    "hideSymbolLogo": false,
+    "isTransparent": true
+  }
+  </script>
+</div>
+</div>
 
         <div style="height:12px"></div>
 
         <!-- 3) BURAYA TradingView "Symbol Overview" (XAGUSD) -->
-        <div class="widget">Widget buraya gelecek (Gümüş)</div>
+        <div class="widget"><div class="tradingview-widget-container" style="height: 240px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+    "symbols": [["Gümüş","OANDA:XAGUSD|1D"]],
+    "chartOnly": false,
+    "width": "100%",
+    "height": 240,
+    "locale": "tr",
+    "colorTheme": "dark",
+    "autosize": false,
+    "showVolume": false,
+    "showMA": false,
+    "hideDateRanges": false,
+    "hideMarketStatus": false,
+    "hideSymbolLogo": false,
+    "isTransparent": true
+  }
+  </script>
+</div>
+</div>
       </div>
 
       <div class="card span6" id="endeks">
@@ -118,12 +173,54 @@
         <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
         <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
-        <div class="widget">Widget buraya gelecek (BIST 100)</div>
+        <div class="widget"><div class="tradingview-widget-container" style="height: 260px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+  {
+    "symbols": [["BIST 100","BIST:XU100|1D"]],
+    "chartOnly": false,
+    "width": "100%",
+    "height": 260,
+    "locale": "tr",
+    "colorTheme": "dark",
+    "isTransparent": true,
+    "showVolume": false,
+    "showMA": false,
+    "hideDateRanges": false,
+    "hideMarketStatus": false
+  }
+  </script>
+</div>
+</div>
 
         <div style="height:12px"></div>
 
         <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
-        <div class="widget">Widget buraya gelecek (S&P + NASDAQ)</div>
+        <div class="widget"><div class="tradingview-widget-container" style="height: 260px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+  {
+    "colorTheme": "dark",
+    "dateRange": "12M",
+    "showChart": true,
+    "locale": "tr",
+    "width": "100%",
+    "height": 260,
+    "isTransparent": true,
+    "tabs": [
+      {
+        "title": "Endeks",
+        "symbols": [
+          {"s": "SP:SPX", "d": "S&P 500"},
+          {"s": "NASDAQ:NDX", "d": "NASDAQ 100"},
+          {"s": "TVC:DXY", "d": "DXY"}
+        ]
+      }
+    ]
+  }
+  </script>
+</div>
+</div>
       </div>
 
       <div class="card" id="kripto">
@@ -131,7 +228,23 @@
         <p>BTC, ETH ve öne çıkanlar.</p>
 
         <!-- 6) BURAYA TradingView "Screener" veya "Market Overview" (Crypto) -->
-        <div class="widget">Widget buraya gelecek (Kripto)</div>
+        <div class="widget"><div class="tradingview-widget-container" style="height: 420px;">
+  <div class="tradingview-widget-container__widget"></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+    "width": "100%",
+    "height": 420,
+    "defaultColumn": "overview",
+    "defaultScreen": "general",
+    "market": "crypto",
+    "showToolbar": true,
+    "colorTheme": "dark",
+    "locale": "tr",
+    "isTransparent": true
+  }
+  </script>
+</div>
+</div>
       </div>
 
       <div class="card" id="haber">
