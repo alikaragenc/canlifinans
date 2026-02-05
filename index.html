@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piyasa Paneli</title>
+  <meta name="description" content="Döviz, altın-gümüş, BIST 100, endeksler ve kripto fiyatları — sade piyasa paneli." />
+
+  <style>
+    :root{
+      --bg:#0b1220;
+      --card:#0f1a2e;
+      --border:rgba(255,255,255,.08);
+      --text:#e8eefc;
+      --muted:rgba(232,238,252,.65);
+      --link:#b9d3ff;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(80,130,255,.18), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(0,230,180,.14), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+    }
+    .container{max-width:1100px;margin:0 auto;padding:20px}
+    header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:10px 0 18px}
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .sub{margin:6px 0 0;color:var(--muted);font-size:13px}
+    .clock{color:var(--muted);font-size:13px;white-space:nowrap}
+    nav{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
+    nav a{
+      text-decoration:none;color:var(--link);
+      border:1px solid var(--border);padding:8px 10px;border-radius:999px;
+      background:rgba(255,255,255,.03)
+    }
+    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
+    .card{
+      grid-column:span 12;
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      border:1px solid var(--border);
+      border-radius:18px;
+      padding:14px;
+      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      overflow:hidden;
+    }
+    .card h2{margin:0 0 6px;font-size:16px}
+    .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
+    .widget{
+      border:1px dashed rgba(255,255,255,.18);
+      border-radius:14px;
+      padding:12px;
+      min-height:220px;
+      display:flex;align-items:center;justify-content:center;
+      color:rgba(232,238,252,.55);
+      background:rgba(0,0,0,.10);
+    }
+    @media (min-width: 900px){
+      .span6{grid-column:span 6}
+      .span4{grid-column:span 4}
+    }
+    .news{display:grid;gap:10px}
+    .news a{color:var(--link);text-decoration:none}
+    .news-item{
+      border:1px solid var(--border);
+      border-radius:14px;
+      padding:10px 12px;
+      background:rgba(255,255,255,.02);
+    }
+    .news-meta{color:var(--muted);font-size:12px;margin-top:4px}
+    footer{margin:18px 0 6px;color:var(--muted);font-size:12px}
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div>
+        <h1>Piyasa Paneli</h1>
+        <div class="sub">Döviz • Altın/Gümüş • BIST 100 • S&P 500 • NASDAQ • Kripto</div>
+      </div>
+      <div class="clock" id="clock">—</div>
+    </header>
+
+    <nav>
+      <a href="#doviz">Döviz</a>
+      <a href="#emtia">Altın / Gümüş</a>
+      <a href="#endeks">BIST 100 / Endeks</a>
+      <a href="#kripto">Kripto</a>
+      <a href="#haber">Günün Notları</a>
+    </nav>
+
+    <section class="grid">
+      <div class="card" id="doviz">
+        <h2>Döviz</h2>
+        <p>USD/TRY, EUR/TRY gibi pariteler — otomatik güncellenir.</p>
+
+        <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
+        <div class="widget">Widget buraya gelecek (Döviz)</div>
+      </div>
+
+      <div class="card span6" id="emtia">
+        <h2>Altın / Gümüş</h2>
+        <p>XAUUSD ve XAGUSD grafikleri.</p>
+
+        <!-- 2) BURAYA TradingView "Symbol Overview" (XAUUSD) -->
+        <div class="widget">Widget buraya gelecek (Altın)</div>
+
+        <div style="height:12px"></div>
+
+        <!-- 3) BURAYA TradingView "Symbol Overview" (XAGUSD) -->
+        <div class="widget">Widget buraya gelecek (Gümüş)</div>
+      </div>
+
+      <div class="card span6" id="endeks">
+        <h2>BIST 100 / Endeksler</h2>
+        <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
+
+        <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
+        <div class="widget">Widget buraya gelecek (BIST 100)</div>
+
+        <div style="height:12px"></div>
+
+        <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
+        <div class="widget">Widget buraya gelecek (S&P + NASDAQ)</div>
+      </div>
+
+      <div class="card" id="kripto">
+        <h2>Kripto</h2>
+        <p>BTC, ETH ve öne çıkanlar.</p>
+
+        <!-- 6) BURAYA TradingView "Screener" veya "Market Overview" (Crypto) -->
+        <div class="widget">Widget buraya gelecek (Kripto)</div>
+      </div>
+
+      <div class="card" id="haber">
+        <h2>Günün Notları (kısa & özgün)</h2>
+        <p>Her gün 2–4 kısa not girmen yeter (SEO için de iyi).</p>
+
+        <div class="news">
+          <div class="news-item">
+            <a href="#" onclick="return false;">Örnek Başlık: Piyasalarda günün gündemi</a>
+            <div class="news-meta">05 Şubat 2026 • 30 sn okuma</div>
+          </div>
+
+          <div class="news-item">
+            <a href="#" onclick="return false;">Örnek Başlık: Altın/Döviz tarafında dikkat çeken seviye</a>
+            <div class="news-meta">05 Şubat 2026 • 20 sn okuma</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Not: Veriler widget sağlayıcısından gelir. Bu sayfa sadece sade bir panel arayüzüdür.
+    </footer>
+  </div>
+
+  <script>
+    function tick(){
+      const now = new Date();
+      const fmt = new Intl.DateTimeFormat('tr-TR', {
+        dateStyle:'medium', timeStyle:'short'
+      });
+      document.getElementById('clock').textContent = fmt.format(now);
+    }
+    tick(); setInterval(tick, 1000 * 15);
+  </script>
+</body>
+</html>
