@@ -3,382 +3,500 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>CanlıFinans</title>
-  <meta name="description" content="Döviz, altın-gümüş, BIST 100, endeksler ve kripto fiyatları — sade piyasa paneli." />
+  <title>CanliFinans • Piyasa Paneli</title>
 
   <style>
     :root{
-      --bg:#0b1220;
-      --card:#0f1a2e;
-      --border:rgba(255,255,255,.08);
-      --text:#e8eefc;
-      --muted:rgba(232,238,252,.65);
-      --link:#b9d3ff;
+      --bg1:#061425;
+      --bg2:#081b2f;
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(0,0,0,.10);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.14);
+      --text: rgba(232,238,252,.92);
+      --muted: rgba(232,238,252,.62);
+      --muted2: rgba(232,238,252,.45);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --r: 18px;
     }
+
     *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-      background: radial-gradient(1200px 600px at 20% -10%, rgba(80,130,255,.18), transparent 60%),
-                  radial-gradient(900px 500px at 90% 0%, rgba(0,230,180,.14), transparent 55%),
-                  var(--bg);
-      color:var(--text);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(1200px 700px at 30% 10%, rgba(62,160,255,.18), transparent 55%),
+        radial-gradient(900px 600px at 85% 30%, rgba(0,255,210,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2) 60%, #05101f);
+      padding: 28px 18px 40px;
     }
-    .container{max-width:1100px;margin:0 auto;padding:20px}
-    header{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:10px 0 18px}
-    h1{margin:0;font-size:22px;letter-spacing:.2px}
-    .sub{margin:6px 0 0;color:var(--muted);font-size:13px}
-    .clock{color:var(--muted);font-size:13px;white-space:nowrap}
-    nav{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 18px}
-    nav a{
-      text-decoration:none;color:var(--link);
-      border:1px solid var(--border);padding:8px 10px;border-radius:999px;
-      background:rgba(255,255,255,.03)
-    }
-    .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
-    .card{
-      grid-column:span 12;
-      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
-      border:1px solid var(--border);
-      border-radius:18px;
-      padding:14px;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
-    .card h2{margin:0 0 6px;font-size:16px}
-    .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
-    .widget{
-      border:1px dashed rgba(255,255,255,.18);
-      border-radius:14px;
-      padding:12px;
-      min-height:220px;
-      display:flex;align-items:center;justify-content:center;
-      color:rgba(232,238,252,.55);
-      background:rgba(0,0,0,.10);
-    }
-    @media (min-width: 900px){
-      .span6{grid-column:span 6}
-      .span4{grid-column:span 4}
-    }
-    .news{display:grid;gap:10px}
-    .news a{color:var(--link);text-decoration:none}
-    .news-item{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:10px 12px;
-      background:rgba(255,255,255,.02);
-    }
-    .news-meta{color:var(--muted);font-size:12px;margin-top:4px}
-    footer{margin:18px 0 6px;color:var(--muted);font-size:12px}
-  </style>
-  <style>
-  .right-stack .tv-box{
-    height: 120px;
-    overflow: hidden;
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 14px;
-    background: rgba(0,0,0,.08);
-    padding: 10px 10px 0;
-    margin-bottom: 12px;
-  }
-  .right-stack h4{
-    margin: 0 0 8px 0;
-    font-size: 13px;
-    color: rgba(232,238,252,.85);
-    font-weight: 600;
-  }
-</style>
 
+    .wrap{max-width:1080px; margin:0 auto;}
+    .top{
+      display:flex; align-items:flex-start; justify-content:space-between; gap:14px;
+      margin-bottom: 14px;
+    }
+    .brand h1{
+      font-size: 28px; line-height:1.1; margin:0 0 6px 0;
+      letter-spacing:.2px;
+    }
+    .brand p{margin:0; color:var(--muted); font-size:13px}
+    .meta{
+      text-align:right; color:var(--muted);
+      font-size:12px; line-height:1.4;
+      padding-top: 6px;
+      white-space:nowrap;
+    }
+
+    .tabs{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin: 14px 0 18px;
+    }
+    .tab{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      cursor: pointer;
+      user-select:none;
+      transition: .15s ease;
+    }
+    .tab:hover{border-color: var(--stroke2)}
+    .tab.active{
+      background: rgba(62,160,255,.15);
+      border-color: rgba(62,160,255,.35);
+    }
+
+    .panel{display:none;}
+    .panel.active{display:block;}
+
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border: 1px solid var(--stroke);
+      border-radius: var(--r);
+      box-shadow: var(--shadow);
+      padding: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    .card h2{
+      margin:0 0 4px;
+      font-size: 15px;
+      letter-spacing:.2px;
+    }
+    .card p.sub{
+      margin:0 0 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.12fr .88fr;
+      gap: 14px;
+      align-items:start;
+    }
+
+    .stack{display:grid; gap:12px;}
+    .widgetbox{
+      border: 1px dashed rgba(255,255,255,.16);
+      border-radius: 14px;
+      background: rgba(0,0,0,.10);
+      overflow:hidden;
+      min-height: 210px;
+    }
+
+    /* Sağ kutudaki 3 mini panel (asla üst üste binmez) */
+    .right-stack{display:grid; gap:12px;}
+    .tv-box{
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 14px;
+      background: rgba(0,0,0,.12);
+      padding: 10px 10px 0;
+      overflow:hidden;
+      height: 122px;
+    }
+    .tv-box h4{
+      margin:0 0 8px 0;
+      font-size: 13px;
+      font-weight: 650;
+      color: rgba(232,238,252,.86);
+      letter-spacing:.2px;
+    }
+    .tv-box .tradingview-widget-container{height:86px !important}
+
+    /* Notlar */
+    textarea{
+      width:100%;
+      min-height: 220px;
+      border-radius: 14px;
+      border: 1px solid var(--stroke);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      padding: 12px 12px;
+      outline:none;
+      resize: vertical;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .noteRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:10px}
+    .btn{
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.05);
+      color: var(--text);
+      padding: 9px 12px;
+      border-radius: 12px;
+      cursor:pointer;
+      font-size: 13px;
+    }
+    .btn:hover{border-color: var(--stroke2)}
+    .hint{color:var(--muted2); font-size:12px}
+
+    /* Küçük ekran */
+    @media (max-width: 900px){
+      .grid{grid-template-columns:1fr}
+      .meta{text-align:left}
+    }
+  </style>
 </head>
 
 <body>
-  <div class="container">
-    <header>
-      <div>
-        <h1>Canlı Finans - Döviz-Emtia-BİST100-SP500-NASDAQ</h1>
-        <div class="sub">Döviz • Altın/Gümüş • BIST 100 • S&P 500 • NASDAQ • Kripto</div>
+  <div class="wrap">
+    <div class="top">
+      <div class="brand">
+        <h1>Piyasa Paneli</h1>
+        <p>Döviz • Altın/Gümüş • ABD Hisseleri • Kripto • Emtialar</p>
       </div>
-      <div class="clock" id="clock">—</div>
-    </header>
+      <div class="meta">
+        <div id="clock">—</div>
+        <div class="hint">CanliFinans (GitHub Pages)</div>
+      </div>
+    </div>
 
-    <nav>
-      <a href="#doviz">Döviz</a>
-      <a href="#emtia">Altın / Gümüş</a>
-      <a href="#endeks">BIST 100 / Endeks</a>
-      <a href="#kripto">Kripto</a>
-      <a href="#haber">Günün Notları</a>
-    </nav>
+    <div class="tabs" id="tabs">
+      <div class="tab active" data-tab="fx">Döviz</div>
+      <div class="tab" data-tab="metals">Altın / Gümüş</div>
+      <div class="tab" data-tab="markets">ABD + Kripto + Emtia</div>
+      <div class="tab" data-tab="notes">Günün Notları</div>
+    </div>
 
-    <section class="grid">
-      <div class="card" id="doviz">
+    <!-- Döviz -->
+    <section class="panel active" id="panel-fx">
+      <div class="card">
         <h2>Döviz</h2>
-        <p>USD/TRY, EUR/TRY gibi pariteler — otomatik güncellenir.</p>
+        <p class="sub">USD/TRY, EUR/TRY gibi çaprazlar — otomatik güncellenir.</p>
 
-        <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
-        <div class="tradingview-widget-container" style="height:300px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
-  {
-    "width": "100%",
-    "height": 300,
-    "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
-    "isTransparent": true,
-    "colorTheme": "dark",
-    "locale": "tr"
-  }
-  </script>
-</div>
-
-      </div>
-
-      <div class="card span6" id="emtia">
-        <h2>Altın / Gümüş</h2>
-        <p>XAUUSD ve XAGUSD grafikleri.</p>
-
-        <!-- 2) BURAYA TradingView "Symbol Overview" (XAUUSD) -->
-   <div class="tradingview-widget-container" style="height:240px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-  {
-    "symbols": [["Gram Altın (TL)","FX_IDC:XAUTRYG|1D"]],
-    "chartOnly": false,
-    "width": "100%",
-    "height": 240,
-    "locale": "tr",
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "showVolume": false,
-    "showMA": false,
-    "hideDateRanges": false,
-    "hideMarketStatus": false,
-    "hideSymbolLogo": false
-  }
-  </script>
-</div>
-
-
-        <div style="height:12px"></div>
-
-        <!-- 3) BURAYA TradingView "Symbol Overview" (XAGUSD) -->
-        <div class="tradingview-widget-container" style="height:240px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-  {
-    "symbols": [["Gümüş (USD)","OANDA:XAGUSD|1D"]],
-    "chartOnly": false,
-    "width": "100%",
-    "height": 240,
-    "locale": "tr",
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "showVolume": false,
-    "showMA": false,
-    "hideDateRanges": false,
-    "hideMarketStatus": false,
-    "hideSymbolLogo": false
-  }
-  </script>
-</div>
-
-      </div>
-
-      <div class="right-stack">
-
-  <div class="tv-box">
-    <h4>ABD Hisseleri</h4>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-      {
-        "symbols": [
-          {"proName":"NASDAQ:AAPL","title":"AAPL"},
-          {"proName":"NASDAQ:MSFT","title":"MSFT"},
-          {"proName":"NASDAQ:NVDA","title":"NVDA"},
-          {"proName":"NASDAQ:GOOGL","title":"GOOGL"},
-          {"proName":"NASDAQ:AMZN","title":"AMZN"},
-          {"proName":"NYSE:TSLA","title":"TSLA"}
-        ],
-        "colorTheme":"dark",
-        "isTransparent":true,
-        "locale":"tr"
-      }
-      </script>
-    </div>
-  </div>
-
-  <div class="tv-box">
-    <h4>Kripto</h4>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-      {
-        "symbols": [
-          {"proName":"BINANCE:BTCUSDT","title":"BTC"},
-          {"proName":"BINANCE:ETHUSDT","title":"ETH"},
-          {"proName":"BINANCE:SOLUSDT","title":"SOL"},
-          {"proName":"BINANCE:BNBUSDT","title":"BNB"},
-          {"proName":"BINANCE:XRPUSDT","title":"XRP"}
-        ],
-        "colorTheme":"dark",
-        "isTransparent":true,
-        "locale":"tr"
-      }
-      </script>
-    </div>
-  </div>
-
-  <div class="tv-box" style="margin-bottom:0;">
-    <h4>Emtialar</h4>
-    <div class="tradingview-widget-container" style="height:80px;">
-      <div class="tradingview-widget-container__widget"></div>
-      <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-      {
-        "symbols": [
-          {"proName":"TVC:UKOIL","title":"Brent"},
-          {"proName":"TVC:USOIL","title":"WTI"},
-          {"proName":"TVC:NATGAS","title":"Gas"},
-          {"proName":"TVC:COPPER","title":"Copper"},
-          {"proName":"TVC:SILVER","title":"Silver"},
-          {"proName":"TVC:GOLD","title":"Gold"}
-        ],
-        "colorTheme":"dark",
-        "isTransparent":true,
-        "locale":"tr"
-      }
-      </script>
-    </div>
-  </div>
-
-</div>
-
-<!-- Kripto -->
-<h3>Kripto Paralar</h3>
-<div class="tradingview-widget-container" style="margin-bottom:12px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-  {
-    "symbols": [
-      {"proName": "BINANCE:BTCUSDT", "title": "Bitcoin"},
-      {"proName": "BINANCE:ETHUSDT", "title": "Ethereum"},
-      {"proName": "BINANCE:SOLUSDT", "title": "Solana"},
-      {"proName": "BINANCE:BNBUSDT", "title": "BNB"},
-      {"proName": "BINANCE:XRPUSDT", "title": "XRP"}
-    ],
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "locale": "tr"
-  }
-  </script>
-</div>
-
-<!-- Emtialar -->
-<h3>Emtialar</h3>
-<div class="tradingview-widget-container">
-  <div class="tradingview-widget-container__widget"></div>
-  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
-  {
-    "symbols": [
-      {"proName": "TVC:UKOIL", "title": "Brent Petrol"},
-      {"proName": "TVC:USOIL", "title": "Ham Petrol"},
-      {"proName": "TVC:NATGAS", "title": "Doğalgaz"},
-      {"proName": "TVC:COPPER", "title": "Bakır"},
-      {"proName": "TVC:SILVER", "title": "Gümüş"},
-      {"proName": "TVC:GOLD", "title": "Altın"}
-    ],
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "locale": "tr"
-  }
-  </script>
-</div>
-</div>
-
-        <div style="height:12px"></div>
-
-        <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
-       <div class="tradingview-widget-container" style="height:300px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-  {
-    "symbols": [
-      ["S&P 500","SP:SPX|1D"],
-      ["NASDAQ 100","NASDAQ:NDX|1D"],
-      ["DXY","TVC:DXY|1D"]
-    ],
-    "chartOnly": false,
-    "width": "100%",
-    "height": 300,
-    "locale": "tr",
-    "colorTheme": "dark",
-    "isTransparent": true,
-    "showVolume": false,
-    "showMA": false,
-    "hideDateRanges": false,
-    "hideMarketStatus": false,
-    "hideSymbolLogo": false
-  }
-  </script>
-</div>
-
-      </div>
-
-      <div class="card" id="kripto">
-        <h2>Kripto</h2>
-        <p>BTC, ETH ve öne çıkanlar.</p>
-
-        <!-- 6) BURAYA TradingView "Screener" veya "Market Overview" (Crypto) -->
-       <div class="tradingview-widget-container" style="height:420px;">
-  <div class="tradingview-widget-container__widget"></div>
-  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-  {
-    "width": "100%",
-    "height": 420,
-    "defaultColumn": "overview",
-    "defaultScreen": "general",
-    "market": "crypto",
-    "showToolbar": true,
-    "colorTheme": "dark",
-    "locale": "tr",
-    "isTransparent": true
-  }
-  </script>
-</div>
-
-      </div>
-
-      <div class="card" id="haber">
-        <h2>Günün Notları (kısa & özgün)</h2>
-        <p>Her gün 2–4 kısa not girmen yeter (SEO için de iyi).</p>
-
-        <div class="news">
-          <div class="news-item">
-            <a href="#" onclick="return false;">Örnek Başlık: Piyasalarda günün gündemi</a>
-            <div class="news-meta">05 Şubat 2026 • 30 sn okuma</div>
-          </div>
-
-          <div class="news-item">
-            <a href="#" onclick="return false;">Örnek Başlık: Altın/Döviz tarafında dikkat çeken seviye</a>
-            <div class="news-meta">05 Şubat 2026 • 20 sn okuma</div>
+        <div class="widgetbox" style="min-height:260px;">
+          <div class="tradingview-widget-container" style="height:260px;">
+            <div class="tradingview-widget-container__widget"></div>
+            <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
+            {
+              "width": "100%",
+              "height": "260",
+              "currencies": ["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
+              "isTransparent": true,
+              "colorTheme": "dark",
+              "locale": "tr"
+            }
+            </script>
           </div>
         </div>
       </div>
     </section>
 
-    <footer>
-      Not: Veriler widget sağlayıcısından gelir. Bu sayfa sadece sade bir panel arayüzüdür.
-    </footer>
+    <!-- Altın / Gümüş -->
+    <section class="panel" id="panel-metals">
+      <div class="card">
+        <h2>Altın / Gümüş</h2>
+        <p class="sub">Gram altın (TRY) ve gümüş (USD) — kompakt, temaya uyumlu.</p>
+
+        <div class="grid">
+          <div class="stack">
+            <div class="widgetbox" style="min-height:240px;">
+              <div class="tradingview-widget-container" style="height:240px;">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                {
+                  "symbols": [["Altın (Gram/TL)","FX_IDC:XAUTRYG|1D"]],
+                  "chartOnly": false,
+                  "width": "100%",
+                  "height": 240,
+                  "locale": "tr",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "showVolume": false,
+                  "showMA": false,
+                  "hideDateRanges": false,
+                  "hideMarketStatus": false,
+                  "hideSymbolLogo": false
+                }
+                </script>
+              </div>
+            </div>
+
+            <div class="widgetbox" style="min-height:240px;">
+              <div class="tradingview-widget-container" style="height:240px;">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
+                {
+                  "symbols": [["Gümüş (XAGUSD)","TVC:SILVER|1D"]],
+                  "chartOnly": false,
+                  "width": "100%",
+                  "height": 240,
+                  "locale": "tr",
+                  "colorTheme": "dark",
+                  "isTransparent": true,
+                  "showVolume": false,
+                  "showMA": false,
+                  "hideDateRanges": false,
+                  "hideMarketStatus": false,
+                  "hideSymbolLogo": false
+                }
+                </script>
+              </div>
+            </div>
+          </div>
+
+          <div class="card" style="padding:14px; min-height: 510px;">
+            <h2>Hızlı Bakış</h2>
+            <p class="sub">ABD + Kripto + Emtia (kompakt) — sekmeden de görebilirsin.</p>
+
+            <div class="right-stack">
+              <div class="tv-box">
+                <h4>ABD Hisseleri</h4>
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                  {
+                    "symbols": [
+                      {"proName":"NASDAQ:AAPL","title":"AAPL"},
+                      {"proName":"NASDAQ:MSFT","title":"MSFT"},
+                      {"proName":"NASDAQ:NVDA","title":"NVDA"},
+                      {"proName":"NASDAQ:GOOGL","title":"GOOGL"},
+                      {"proName":"NASDAQ:AMZN","title":"AMZN"},
+                      {"proName":"NYSE:TSLA","title":"TSLA"}
+                    ],
+                    "colorTheme":"dark",
+                    "isTransparent":true,
+                    "locale":"tr"
+                  }
+                  </script>
+                </div>
+              </div>
+
+              <div class="tv-box">
+                <h4>Kripto</h4>
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                  {
+                    "symbols": [
+                      {"proName":"BINANCE:BTCUSDT","title":"BTC"},
+                      {"proName":"BINANCE:ETHUSDT","title":"ETH"},
+                      {"proName":"BINANCE:SOLUSDT","title":"SOL"},
+                      {"proName":"BINANCE:BNBUSDT","title":"BNB"},
+                      {"proName":"BINANCE:XRPUSDT","title":"XRP"}
+                    ],
+                    "colorTheme":"dark",
+                    "isTransparent":true,
+                    "locale":"tr"
+                  }
+                  </script>
+                </div>
+              </div>
+
+              <div class="tv-box" style="margin-bottom:0;">
+                <h4>Emtialar</h4>
+                <div class="tradingview-widget-container">
+                  <div class="tradingview-widget-container__widget"></div>
+                  <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+                  {
+                    "symbols": [
+                      {"proName":"TVC:UKOIL","title":"Brent"},
+                      {"proName":"TVC:USOIL","title":"WTI"},
+                      {"proName":"TVC:NATGAS","title":"Gas"},
+                      {"proName":"TVC:COPPER","title":"Copper"},
+                      {"proName":"TVC:SILVER","title":"Silver"},
+                      {"proName":"TVC:GOLD","title":"Gold"}
+                    ],
+                    "colorTheme":"dark",
+                    "isTransparent":true,
+                    "locale":"tr"
+                  }
+                  </script>
+                </div>
+              </div>
+
+              <div class="hint" style="margin-top:10px;">
+                Not: Bu panel grafik yerine kompakt veriyi hedefler — sayfa uzamaz, tema bozulmaz.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Piyasalar -->
+    <section class="panel" id="panel-markets">
+      <div class="card">
+        <h2>ABD + Kripto + Emtia</h2>
+        <p class="sub">Sağ kutudaki kompakt panellerin aynısı — burada geniş görünür.</p>
+
+        <div class="right-stack">
+          <div class="tv-box" style="height:140px;">
+            <h4>ABD Hisseleri</h4>
+            <div class="tradingview-widget-container" style="height:100px;">
+              <div class="tradingview-widget-container__widget"></div>
+              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+              {
+                "symbols": [
+                  {"proName":"NASDAQ:AAPL","title":"Apple"},
+                  {"proName":"NASDAQ:MSFT","title":"Microsoft"},
+                  {"proName":"NASDAQ:NVDA","title":"Nvidia"},
+                  {"proName":"NASDAQ:GOOGL","title":"Google"},
+                  {"proName":"NASDAQ:AMZN","title":"Amazon"},
+                  {"proName":"NYSE:TSLA","title":"Tesla"}
+                ],
+                "colorTheme":"dark",
+                "isTransparent":true,
+                "locale":"tr"
+              }
+              </script>
+            </div>
+          </div>
+
+          <div class="tv-box" style="height:140px;">
+            <h4>Kripto</h4>
+            <div class="tradingview-widget-container" style="height:100px;">
+              <div class="tradingview-widget-container__widget"></div>
+              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+              {
+                "symbols": [
+                  {"proName":"BINANCE:BTCUSDT","title":"Bitcoin"},
+                  {"proName":"BINANCE:ETHUSDT","title":"Ethereum"},
+                  {"proName":"BINANCE:SOLUSDT","title":"Solana"},
+                  {"proName":"BINANCE:BNBUSDT","title":"BNB"},
+                  {"proName":"BINANCE:XRPUSDT","title":"XRP"}
+                ],
+                "colorTheme":"dark",
+                "isTransparent":true,
+                "locale":"tr"
+              }
+              </script>
+            </div>
+          </div>
+
+          <div class="tv-box" style="height:140px; margin-bottom:0;">
+            <h4>Emtialar</h4>
+            <div class="tradingview-widget-container" style="height:100px;">
+              <div class="tradingview-widget-container__widget"></div>
+              <script src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+              {
+                "symbols": [
+                  {"proName":"TVC:UKOIL","title":"Brent"},
+                  {"proName":"TVC:USOIL","title":"Ham Petrol"},
+                  {"proName":"TVC:NATGAS","title":"Doğalgaz"},
+                  {"proName":"TVC:COPPER","title":"Bakır"},
+                  {"proName":"TVC:SILVER","title":"Gümüş"},
+                  {"proName":"TVC:GOLD","title":"Altın"}
+                ],
+                "colorTheme":"dark",
+                "isTransparent":true,
+                "locale":"tr"
+              }
+              </script>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notlar -->
+    <section class="panel" id="panel-notes">
+      <div class="card">
+        <h2>Günün Notları</h2>
+        <p class="sub">Kısa kısa not al — sayfa kapanınca da kalsın (tarayıcıya kaydedilir).</p>
+
+        <textarea id="notes" placeholder="Örnek:
+• USD/TRY kırılım seviyesi...
+• Altın: ...
+• Bugün izlenecek haber: ...
+• Yapılacak: ..."></textarea>
+
+        <div class="noteRow">
+          <button class="btn" id="saveBtn">Kaydet</button>
+          <button class="btn" id="clearBtn">Temizle</button>
+          <span class="hint" id="saveHint">—</span>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
+    // Saat
+    const clockEl = document.getElementById("clock");
     function tick(){
-      const now = new Date();
-      const fmt = new Intl.DateTimeFormat('tr-TR', {
-        dateStyle:'medium', timeStyle:'short'
-      });
-      document.getElementById('clock').textContent = fmt.format(now);
+      const d = new Date();
+      const pad = (n)=> String(n).padStart(2,"0");
+      const txt = `${pad(d.getDate())}.${pad(d.getMonth()+1)}.${d.getFullYear()} • ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+      clockEl.textContent = txt;
     }
-    tick(); setInterval(tick, 1000 * 15);
+    setInterval(tick, 1000); tick();
+
+    // Sekmeler
+    const tabs = document.querySelectorAll(".tab");
+    const panels = {
+      fx: document.getElementById("panel-fx"),
+      metals: document.getElementById("panel-metals"),
+      markets: document.getElementById("panel-markets"),
+      notes: document.getElementById("panel-notes")
+    };
+    tabs.forEach(t=>{
+      t.addEventListener("click", ()=>{
+        tabs.forEach(x=>x.classList.remove("active"));
+        t.classList.add("active");
+        Object.values(panels).forEach(p=>p.classList.remove("active"));
+        panels[t.dataset.tab].classList.add("active");
+        window.scrollTo({top:0, behavior:"smooth"});
+      });
+    });
+
+    // Notlar (localStorage)
+    const notes = document.getElementById("notes");
+    const saveBtn = document.getElementById("saveBtn");
+    const clearBtn = document.getElementById("clearBtn");
+    const saveHint = document.getElementById("saveHint");
+    const KEY = "canlifinans_notes_v1";
+
+    function loadNotes(){
+      const v = localStorage.getItem(KEY);
+      if(v) notes.value = v;
+    }
+    function saveNotes(){
+      localStorage.setItem(KEY, notes.value);
+      saveHint.textContent = "Kaydedildi ✅";
+      setTimeout(()=> saveHint.textContent="—", 2000);
+    }
+    function clearNotes(){
+      notes.value = "";
+      localStorage.removeItem(KEY);
+      saveHint.textContent = "Temizlendi";
+      setTimeout(()=> saveHint.textContent="—", 2000);
+    }
+
+    saveBtn.addEventListener("click", saveNotes);
+    clearBtn.addEventListener("click", clearNotes);
+    notes.addEventListener("keydown", (e)=>{
+      if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==="s"){
+        e.preventDefault(); saveNotes();
+      }
+    });
+
+    loadNotes();
   </script>
 </body>
 </html>
-
