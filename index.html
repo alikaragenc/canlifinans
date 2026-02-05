@@ -4,24 +4,24 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Piyasa Paneli</title>
-  <meta name="description" content="Döviz, gram altın (TL), gümüş, BIST, S&P 500, NASDAQ ve kripto — sade piyasa paneli." />
+  <meta name="description" content="Döviz, altın-gümüş, BIST 100, endeksler ve kripto fiyatları — sade piyasa paneli." />
+
   <style>
     :root{
       --bg:#0b1220;
+      --card:#0f1a2e;
       --border:rgba(255,255,255,.08);
       --text:#e8eefc;
       --muted:rgba(232,238,252,.65);
       --link:#b9d3ff;
-      --cardBg:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
     }
     *{box-sizing:border-box}
     body{
       margin:0;
       font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;
-      background:
-        radial-gradient(1200px 600px at 20% -10%, rgba(80,130,255,.18), transparent 60%),
-        radial-gradient(900px 500px at 90% 0%, rgba(0,230,180,.14), transparent 55%),
-        var(--bg);
+      background: radial-gradient(1200px 600px at 20% -10%, rgba(80,130,255,.18), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(0,230,180,.14), transparent 55%),
+                  var(--bg);
       color:var(--text);
     }
     .container{max-width:1100px;margin:0 auto;padding:20px}
@@ -38,7 +38,7 @@
     .grid{display:grid;gap:14px;grid-template-columns:repeat(12,1fr)}
     .card{
       grid-column:span 12;
-      background:var(--cardBg);
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border:1px solid var(--border);
       border-radius:18px;
       padding:14px;
@@ -47,31 +47,19 @@
     }
     .card h2{margin:0 0 6px;font-size:16px}
     .card p{margin:0 0 10px;color:var(--muted);font-size:13px}
-    @media (min-width: 900px){ .span6{grid-column:span 6} }
-
-    /* Embed box (fixed height, no “full page takeover”) */
-    .embed{
-      position:relative;
+    .widget{
+      border:1px dashed rgba(255,255,255,.18);
       border-radius:14px;
-      overflow:hidden;
-      border:1px solid rgba(255,255,255,.06);
-      background:rgba(0,0,0,.12);
-    }
-    .embed iframe{display:block;border:0;width:100%}
-    .tvwrap{width:100%}
-    .loading{
-      position:absolute;inset:0;
+      padding:12px;
+      min-height:220px;
       display:flex;align-items:center;justify-content:center;
-      color:rgba(232,238,252,.65);
-      font-size:13px;
-      background:rgba(0,0,0,.25);
-      backdrop-filter: blur(2px);
-      z-index:2;
-      transition: opacity .25s ease;
+      color:rgba(232,238,252,.55);
+      background:rgba(0,0,0,.10);
     }
-    .loading.hide{opacity:0;pointer-events:none}
-
-    /* News */
+    @media (min-width: 900px){
+      .span6{grid-column:span 6}
+      .span4{grid-column:span 4}
+    }
     .news{display:grid;gap:10px}
     .news a{color:var(--link);text-decoration:none}
     .news-item{
@@ -80,23 +68,17 @@
       padding:10px 12px;
       background:rgba(255,255,255,.02);
     }
-    .news-meta{color:var(--muted);font-size:12px;margin-top:6px}
-    .news-text{color:rgba(232,238,252,.85);font-size:13px;margin-top:6px;line-height:1.35}
-    code.inline{
-      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,monospace;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.08);
-      padding:2px 6px;border-radius:8px;color:rgba(232,238,252,.9)
-    }
+    .news-meta{color:var(--muted);font-size:12px;margin-top:4px}
     footer{margin:18px 0 6px;color:var(--muted);font-size:12px}
   </style>
 </head>
+
 <body>
   <div class="container">
     <header>
       <div>
         <h1>Piyasa Paneli</h1>
-        <div class="sub">Döviz • Gram Altın (TL) • Gümüş • BIST • S&P 500 • NASDAQ • Kripto</div>
+        <div class="sub">Döviz • Altın/Gümüş • BIST 100 • S&P 500 • NASDAQ • Kripto</div>
       </div>
       <div class="clock" id="clock">—</div>
     </header>
@@ -104,183 +86,86 @@
     <nav>
       <a href="#doviz">Döviz</a>
       <a href="#emtia">Altın / Gümüş</a>
-      <a href="#endeks">BIST / Endeks</a>
+      <a href="#endeks">BIST 100 / Endeks</a>
       <a href="#kripto">Kripto</a>
       <a href="#haber">Günün Notları</a>
     </nav>
 
     <section class="grid">
-
-      <!-- DÖVİZ -->
       <div class="card" id="doviz">
         <h2>Döviz</h2>
-        <p>USD, EUR, GBP, JPY dahil — otomatik güncellenir.</p>
+        <p>USD/TRY, EUR/TRY gibi pariteler — otomatik güncellenir.</p>
 
-        <div class="embed" style="height:300px">
-          <div class="loading" data-autohide>Yükleniyor…</div>
-          <div class="tvwrap" style="height:300px">
-            <div class="tradingview-widget-container" style="height:300px">
-              <div class="tradingview-widget-container__widget"></div>
-              <script src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js" async>
-              {
-                "width":"100%","height":300,
-                "currencies":["USD","EUR","GBP","JPY","CHF","CAD","AUD","NZD","TRY"],
-                "isTransparent":true,"colorTheme":"dark","locale":"tr"
-              }
-              </script>
-            </div>
-          </div>
-        </div>
+        <!-- 1) BURAYA TradingView "Ticker Tape" veya "Market Overview" embed kodu -->
+        <div class="widget">Widget buraya gelecek (Döviz)</div>
       </div>
 
-      <!-- ALTIN / GÜMÜŞ -->
       <div class="card span6" id="emtia">
         <h2>Altın / Gümüş</h2>
-        <p>Altın: Gram TL • Gümüş: USD (en stabil).</p>
+        <p>XAUUSD ve XAGUSD grafikleri.</p>
 
-        <!-- ALTIN (GRAM TL) -->
-        <div class="embed" style="height:240px">
-          <div class="loading" data-autohide>Yükleniyor…</div>
-          <div class="tradingview-widget-container" style="height:240px">
-            <div class="tradingview-widget-container__widget"></div>
-            <script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-            {
-              "symbols":[["Gram Altın (TL)","FX_IDC:XAUTRYG|1D"]],
-              "chartOnly":false,"width":"100%","height":240,
-              "locale":"tr","colorTheme":"dark","isTransparent":true,
-              "showVolume":false,"showMA":false,
-              "hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false
-            }
-            </script>
-          </div>
-        </div>
+        <!-- 2) BURAYA TradingView "Symbol Overview" (XAUUSD) -->
+        <div class="widget">Widget buraya gelecek (Altın)</div>
 
         <div style="height:12px"></div>
 
-        <!-- GÜMÜŞ (USD) -->
-        <div class="embed" style="height:240px">
-          <div class="loading" data-autohide>Yükleniyor…</div>
-          <div class="tradingview-widget-container" style="height:240px">
-            <div class="tradingview-widget-container__widget"></div>
-            <script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-            {
-              "symbols":[["Gümüş (USD)","OANDA:XAGUSD|1D"]],
-              "chartOnly":false,"width":"100%","height":240,
-              "locale":"tr","colorTheme":"dark","isTransparent":true,
-              "showVolume":false,"showMA":false,
-              "hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false
-            }
-            </script>
-          </div>
-        </div>
+        <!-- 3) BURAYA TradingView "Symbol Overview" (XAGUSD) -->
+        <div class="widget">Widget buraya gelecek (Gümüş)</div>
       </div>
 
-      <!-- BIST / ENDEKS -->
       <div class="card span6" id="endeks">
-        <h2>BIST / Endeksler</h2>
-        <p>BIST için TradingView kısıtlayabiliyor. Buraya Investing BIST 100 <code class="inline">&lt;iframe&gt;</code> kodunu ekleyeceğiz.</p>
+        <h2>BIST 100 / Endeksler</h2>
+        <p>BIST:XU100 + S&P 500 + NASDAQ.</p>
 
-        <!-- BIST (INVESTING IFRAME ALANI) -->
-        <div class="embed" style="height:260px">
-          <div class="loading">BIST 100 iframe kodunu buraya yapıştıracağız.</div>
-
-          <!-- ✅ BURAYA Investing BIST 100 iframe kodunu yapıştır -->
-          <!-- ÖRNEK:
-          <iframe height="260" src="..."></iframe>
-          -->
-        </div>
+        <!-- 4) BURAYA TradingView "Symbol Overview" (BIST:XU100) -->
+        <div class="widget">Widget buraya gelecek (BIST 100)</div>
 
         <div style="height:12px"></div>
 
-        <!-- S&P + NASDAQ + DXY -->
-        <div class="embed" style="height:300px">
-          <div class="loading" data-autohide>Yükleniyor…</div>
-          <div class="tradingview-widget-container" style="height:300px">
-            <div class="tradingview-widget-container__widget"></div>
-            <script src="https://s3.tradingview.com/external-embedding/embed-widget-symbol-overview.js" async>
-            {
-              "symbols":[
-                ["S&P 500","SP:SPX|1D"],
-                ["NASDAQ 100","NASDAQ:NDX|1D"],
-                ["DXY","TVC:DXY|1D"]
-              ],
-              "chartOnly":false,"width":"100%","height":300,
-              "locale":"tr","colorTheme":"dark","isTransparent":true,
-              "showVolume":false,"showMA":false,
-              "hideDateRanges":false,"hideMarketStatus":false,"hideSymbolLogo":false
-            }
-            </script>
-          </div>
-        </div>
+        <!-- 5) BURAYA TradingView "Market Overview" (S&P 500, NASDAQ) veya ayrı grafikler -->
+        <div class="widget">Widget buraya gelecek (S&P + NASDAQ)</div>
       </div>
 
-      <!-- KRİPTO -->
       <div class="card" id="kripto">
         <h2>Kripto</h2>
-        <p>Genel görünüm + arama.</p>
+        <p>BTC, ETH ve öne çıkanlar.</p>
 
-        <div class="embed" style="height:420px">
-          <div class="loading" data-autohide>Yükleniyor…</div>
-          <div class="tradingview-widget-container" style="height:420px">
-            <div class="tradingview-widget-container__widget"></div>
-            <script src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
-            {
-              "width":"100%","height":420,
-              "defaultColumn":"overview","defaultScreen":"general",
-              "market":"crypto","showToolbar":true,
-              "colorTheme":"dark","locale":"tr","isTransparent":true
-            }
-            </script>
-          </div>
-        </div>
+        <!-- 6) BURAYA TradingView "Screener" veya "Market Overview" (Crypto) -->
+        <div class="widget">Widget buraya gelecek (Kripto)</div>
       </div>
 
-      <!-- HABER -->
       <div class="card" id="haber">
         <h2>Günün Notları (kısa & özgün)</h2>
-        <p>Her gün 2–4 kısa not gir (SEO + kullanıcı bağlılığı).</p>
+        <p>Her gün 2–4 kısa not girmen yeter (SEO için de iyi).</p>
 
         <div class="news">
           <div class="news-item">
-            <a href="#" onclick="return false;">Günün gündemi</a>
-            <div class="news-text">ABD endeksleri ve DXY yönü kısa vade risk iştahını etkiliyor. Bugün veri akışı yoğun.</div>
-            <div class="news-meta">05 Şubat 2026 • 30 sn</div>
+            <a href="#" onclick="return false;">Örnek Başlık: Piyasalarda günün gündemi</a>
+            <div class="news-meta">05 Şubat 2026 • 30 sn okuma</div>
           </div>
+
           <div class="news-item">
-            <a href="#" onclick="return false;">Altın tarafı</a>
-            <div class="news-text">Gram altın TL’de kur etkisi belirgin. Ons altın ve USDTRY birlikte izlenmeli.</div>
-            <div class="news-meta">05 Şubat 2026 • 20 sn</div>
-          </div>
-          <div class="news-item">
-            <a href="#" onclick="return false;">Kripto</a>
-            <div class="news-text">BTC dominansı ve toplam piyasa değeri trend için erken sinyal verebilir.</div>
-            <div class="news-meta">05 Şubat 2026 • 25 sn</div>
+            <a href="#" onclick="return false;">Örnek Başlık: Altın/Döviz tarafında dikkat çeken seviye</a>
+            <div class="news-meta">05 Şubat 2026 • 20 sn okuma</div>
           </div>
         </div>
       </div>
-
     </section>
 
     <footer>
-      Not: Veriler widget sağlayıcısından gelir. Bu sayfa sade bir panel arayüzüdür.
+      Not: Veriler widget sağlayıcısından gelir. Bu sayfa sadece sade bir panel arayüzüdür.
     </footer>
   </div>
 
   <script>
-    // clock
     function tick(){
       const now = new Date();
-      const fmt = new Intl.DateTimeFormat('tr-TR', { dateStyle:'medium', timeStyle:'short' });
+      const fmt = new Intl.DateTimeFormat('tr-TR', {
+        dateStyle:'medium', timeStyle:'short'
+      });
       document.getElementById('clock').textContent = fmt.format(now);
     }
     tick(); setInterval(tick, 1000 * 15);
-
-    // hide loading overlays after a short delay (TradingView loads async)
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        document.querySelectorAll('[data-autohide]').forEach(el => el.classList.add('hide'));
-      }, 2200);
-    });
   </script>
 </body>
 </html>
